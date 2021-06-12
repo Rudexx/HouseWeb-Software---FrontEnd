@@ -1,0 +1,10 @@
+body{
+    background-image: url("official.jpg");
+    color: aliceblue;
+    background-size:100%;
+    background-repeat: no-repeat;
+    alignment: center;
+}
+button{
+    color: gray;
+}

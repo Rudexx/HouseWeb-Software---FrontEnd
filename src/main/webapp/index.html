@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style ></style>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<header > <h5>Welcome to FourPawsCitizens,
+    please enter your credentials below:</h5>   </header>
+
+<form action="owner.html">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control bg-dark" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-light">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control bg-dark text-warning" id="exampleInputPassword1" placeholder="Password">
+    </div>
+
+    <button type="submit" class="btn btn-dark" >Submit</button>
+</form>
+<h3>Create User:</h3>
+<form>
+<select class="form-select bg-dark text-light" aria-label="Default select example">
+    <option value="1">Owner</option>
+    <option value="2">Veterinary</option>
+    <option value="3">Official</option>
+</select>
+<button type="submit" class="btn btn-dark">Create</button>
+</form>
+
+
+</body>
+</html>
