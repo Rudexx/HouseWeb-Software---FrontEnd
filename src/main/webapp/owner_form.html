@@ -13,15 +13,20 @@
 <body>
 
 
-<form action="owner.html">
 <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control bg-dark" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <label for="email">Email address</label>
+    <input type="email" class="form-control bg-dark text-warning" id="email" aria-describedby="emailHelp" placeholder="Enter email">
     <small id="emailHelp" class="form-text text-light">We'll never share your email with anyone else.</small>
 </div>
+
 <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control bg-dark text-warning" id="exampleInputPassword1" placeholder="Password">
+    <label for="username">Username</label>
+    <input type="text" class="form-control bg-dark text-warning" id="username" placeholder="Username">
+</div>
+
+<div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control bg-dark text-warning" id="password" placeholder="Password">
 </div>
 
     <div class="form-group">
@@ -40,11 +45,71 @@
     </div>
 
 
-<button type="submit" class="btn btn-dark" >Submit</button>
-</form>
+<button type="button" class="btn btn-dark" id="button">Submit</button>
 
 
+<script>
+    var button = document.getElementById("button")
 
+    button.addEventListener('click', function() {
+        var email = document.getElementById("email").value
+        var username = document.getElementById("username").value
+        var password = document.getElementById("password").value
+        var name = document.getElementById("name").value
+        var address = document.getElementById("address").value
+        var neighbourhood = document.getElementById("neighbourhood").value
+
+
+        var uri = 'http://localhost:8080/ProyectoFinal-backend-1.0-SNAPSHOT/api/app?' + "username=" +
+            username + "&" + "password=" + password + "&" + "name=" + name + "&" + "address=" + address +
+            "&" + "neighbourhood=" + neighbourhood + "&role=vet";
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', uri, true);
+
+        xhr.onreadystatechange = function() {
+
+            if (xhr.readyState == 4 && xhr.status == 201) {
+                console.log("llegue aca");
+
+            }
+
+        }
+
+
+        xhr.send(null);
+
+    });
+
+
+    function printTable(elementId, path, columns, actions = []) {
+
+        var username = document.getElementById("username")
+        var password = document.getElementById("password")
+        var name = document.getElementById("name")
+        var address = document.getElementById("address")
+        var neighbourhood = document.getElementById("neighbourhood")
+
+
+        var uri = 'http://localhost:8080/ProyectoFinal-backend-1.0-SNAPSHOT/api/app?' + "username=" +
+            username + "&" + "password=" + password + "&" + "name=" + name + "&" + "address=" + address +
+            "&" + "neighbourhood=" + neighbourhood + "&role=owner";
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', uri, true);
+        xhr.onreadystatechange = function() {
+
+            if (xhr.readyState == 4 && xhr.status == 201) {
+                console.log("llegue aca");
+
+            }
+
+        }
+
+        xhr.send(null);
+
+    }
+</script>
 
 </body>
 </html>
