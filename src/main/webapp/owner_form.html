@@ -59,25 +59,35 @@
         var address = document.getElementById("address").value
         var neighbourhood = document.getElementById("neighbourhood").value
 
+        if (email !== "" && username !== "" && password !== "" && name !== "" && address !== "" && neighbourhood !== "") {
+
+
 
         var uri = 'http://localhost:8080/ProyectoFinal-backend-1.0-SNAPSHOT/api/app?' + "username=" +
             username + "&" + "password=" + password + "&" + "name=" + name + "&" + "address=" + address +
-            "&" + "neighbourhood=" + neighbourhood + "&role=vet";
+            "&" + "neighbourhood=" + neighbourhood + "&" + "role=owner" + "&email=" + email;
 
         var xhr = new XMLHttpRequest();
         xhr.open('POST', uri, true);
 
-        xhr.onreadystatechange = function() {
+        xhr.onreadystatechange = function () {
 
             if (xhr.readyState == 4 && xhr.status == 201) {
-                console.log("llegue aca");
+                alert("Owner was created Successfully")
+                window.location = "Registrarse_InicioSession.html";
 
+            } else if (xhr.readyState == 4 && xhr.status == 406) {
+                alert("That username has already been taken")
             }
 
         }
 
 
         xhr.send(null);
+    }else
+    {
+    alert("incorrect Credentials")
+    }
 
     });
 
