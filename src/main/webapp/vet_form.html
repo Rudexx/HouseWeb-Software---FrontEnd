@@ -13,15 +13,18 @@
 <body>
 
 
-<form id="form">
 <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input name ="email"type="email" class="form-control bg-dark" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <label for="username">Username</label>
+    <input name ="username"type="text" class="form-control bg-dark" id="username" aria-describedby="emailHelp" placeholder="Ex: Veterinary15645">
+</div>
+<div class="form-group">
+    <label for="email">Email address</label>
+    <input name ="email"type="email" class="form-control bg-dark" id="email" aria-describedby="emailHelp" placeholder="Enter email">
     <small id="emailHelp" class="form-text text-light">We'll never share your email with anyone else.</small>
 </div>
 <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input name="password"type="password" class="form-control bg-dark text-warning" id="exampleInputPassword1" placeholder="Password">
+    <label for="password">Password</label>
+    <input name="password"type="password" class="form-control bg-dark text-warning" id="password" placeholder="Password">
 </div>
 
 
@@ -41,93 +44,162 @@
     </div>
 
 
-<button type="submit" class="btn btn-dark" >Submit</button>
-</form>
+<button type="button" class="btn btn-dark" id="button">Submit</button>
+
 <script>
-    var formEl = document.getElementById('form');
+    var button = document.getElementById("button")
 
-    formEl.addEventListener('submit', function(event) {
+    button.addEventListener('click', function() {
 
-        var headers = new Headers();
+        var username = document.getElementById("username").value
+        var password = document.getElementById("password").value
+        var name = document.getElementById("name").value
+        var address = document.getElementById("address").value
+        var neighbourhood = document.getElementById("neighbourhood").value
 
-        headers.set('Accept', 'text/plain');
 
 
-        var formData = new FormData();
-        for (var i = 0; i < formEl.length; ++i) {
-            formData.append(formEl[i].name, formEl[i].value);
+
+        var uri = 'http://localhost:8080/ProyectoFinal-backend-1.0-SNAPSHOT/api/app?' + "username=" +
+            username + "&" + "password=" + password + "&" + "name=" + name + "&" + "address=" + address +
+            "&" + "neighbourhood=" + neighbourhood + "&role=vet";
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', uri, true);
+        xhr.onreadystatechange = function() {
+
+            if (xhr.readyState == 4 && xhr.status == 201) {
+                console.log("llegue aca");
+
+            }
+
         }
 
-        // 2. Make the request
-        // ================================
-        var url = 'http://localhost:8080/ProyectoFinal-backend-1.0-SNAPSHOT/api/app';
-        var fetchOptions = {
-            method: 'PUT',
-            headers,
-            body: formData
-        };
 
-        var responsePromise = fetch(url, fetchOptions);
+        xhr.send(null);
 
-        // 3. Use the response
-        // ================================
-        responsePromise
-            // 3.1 Convert the response into JSON-JS object.
-            .then(function(response) {
-                return response.json();
-            })
-            // 3.2 Do something with the JSON data
-            .then(function(jsonData) {
-                console.log(jsonData);
-                document.getElementById('results').innerText =
-                    JSON.stringify(jsonData);
-            });
-
-
-        event.preventDefault();
     });
 
 
+    function printTable(elementId, path, columns, actions = []) {
+
+        var username = document.getElementById("username")
+        var password = document.getElementById("password")
+        var name = document.getElementById("name")
+        var address = document.getElementById("address")
+        var neighbourhood = document.getElementById("neighbourhood")
+
+
+        var uri = 'http://localhost:8080/ProyectoFinal-backend-1.0-SNAPSHOT/api/app?' + "username=" +
+        username + "&" + "password=" + password + "&" + "name=" + name + "&" + "address=" + address +
+            "&" + "neighbourhood=" + neighbourhood + "&role=vet";
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', uri, true);
+        xhr.onreadystatechange = function() {
+
+            if (xhr.readyState == 4 && xhr.status == 201) {
+                console.log("llegue aca");
+
+            }
+
+        }
+
+
+        xhr.send(null);
+
+    }
 
 
 
-    /*fetch("http://example.com/api/endpoint/", {
-        method: "post",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-
-        //make sure to serialize your JSON body
-        body: JSON.stringify({
-            name: myName,
-            password: myPassword
-        })
-    })
-        .then( (response) => {
-            //do something awesome that makes the world a better place
-        });
 
 
-
-
-    var Enter = new enter();
-    addEventListener('name', function (event){
-        event.respondWith(
-            new Response(Enter, {
-                headers: { "Content-Type" : "text/plain" }
-            })
-        );
-    });
-
-    const url ='http://localhost:8080/ProyectoFinal-backend-1.0-SNAPSHOT/api/app'
-    fetch(url,)
-        .then(response => response.json())
-        .then(data=>{
-
-            console.log(data)
-        })
-        .catch(err=>console.log(err))*/
+    // var formEl = document.getElementById('form');
+    //
+    // formEl.addEventListener('submit', function(event) {
+    //
+    //     var headers = new Headers();
+    //
+    //     headers.set('accept', 'text/plain');
+    //
+    //
+    //     var formData = new FormData();
+    //     for (var i = 0; i < formEl.length; ++i) {
+    //         formData.append(formEl[i].name, formEl[i].value);
+    //     }
+    //     formData.append("role" , "vet")
+    //
+    //
+    //     // 2. Make the request
+    //     // ================================
+    //     var url = 'http://localhost:8080/ProyectoFinal-backend-1.0-SNAPSHOT/api/app';
+    //     var fetchOptions = {
+    //         method: 'PUT',
+    //         headers,
+    //         body: formData
+    //     };
+    //
+    //     var responsePromise = fetch(url, fetchOptions);
+    //
+    //     // 3. Use the response
+    //     // ================================
+    //     responsePromise
+    //         // 3.1 Convert the response into JSON-JS object.
+    //         .then(function(response) {
+    //             return response.json();
+    //         })
+    //         // 3.2 Do something with the JSON data
+    //         .then(function(jsonData) {
+    //             console.log(jsonData);
+    //             document.getElementById('results').innerText =
+    //                 JSON.stringify(jsonData);
+    //         });
+    //
+    //
+    //     event.preventDefault();
+    // });
+    //
+    //
+    //
+    //
+    //
+    // /*fetch("http://example.com/api/endpoint/", {
+    //     method: "post",
+    //     headers: {
+    //         'Accept': 'application/json',
+    //         'Content-Type': 'application/json'
+    //     },
+    //
+    //     //make sure to serialize your JSON body
+    //     body: JSON.stringify({
+    //         name: myName,
+    //         password: myPassword
+    //     })
+    // })
+    //     .then( (response) => {
+    //         //do something awesome that makes the world a better place
+    //     });
+    //
+    //
+    //
+    //
+    // var Enter = new enter();
+    // addEventListener('name', function (event){
+    //     event.respondWith(
+    //         new Response(Enter, {
+    //             headers: { "Content-Type" : "text/plain" }
+    //         })
+    //     );
+    // });
+    //
+    // const url ='http://localhost:8080/ProyectoFinal-backend-1.0-SNAPSHOT/api/app'
+    // fetch(url,)
+    //     .then(response => response.json())
+    //     .then(data=>{
+    //
+    //         console.log(data)
+    //     })
+    //     .catch(err=>console.log(err))*/
 </script>
 
 

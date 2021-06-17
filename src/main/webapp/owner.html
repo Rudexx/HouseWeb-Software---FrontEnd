@@ -39,8 +39,12 @@
 function printTable(elementId, path, columns, actions = []) {
 
 var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, true);
 xhr.onreadystatechange = function() {
-if (xhr.readyState == 4) {
+
+if (xhr.readyState == 4 && xhr.status == 201) {
+
+
 var data = JSON.parse(xhr.responseText);
 
 var tbodyRef = document.getElementById(elementId).getElementsByTagName('tbody')[0];
@@ -85,7 +89,7 @@ cell.appendChild(action);
 
 }
 }
-xhr.open('GET', path, true);
+
 xhr.send(null);
 
 }
