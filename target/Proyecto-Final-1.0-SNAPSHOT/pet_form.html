@@ -13,10 +13,10 @@
 <body>
 
 
-<form id="form" >
+<form action="pet_form.html">
 <div class="form-group">
     <label for="exampleInputmicrochip">Email address</label>
-    <input  type="text" class="form-control bg-dark" id="exampleInputmicrochip" aria-describedby="microchipHelp" placeholder="Enter Microchip">
+    <input type="text" class="form-control bg-dark" id="exampleInputmicrochip" aria-describedby="microchipHelp" placeholder="Enter Microchip">
     <small id="microchipHelp" class="form-text text-light">Don't forget your pet's microchip.</small>
 </div>
 <div class="form-group">
@@ -58,8 +58,26 @@
 
 <button type="submit" class="btn btn-dark" >Enter</button>
 
-</form>
+    <script>
+        var Enter = new enter();
+        addEventListener('fetch', function (event){
+            event.respondWith(
+                new Response(Enter, {
+                    headers: { "Content-Type" : "text/plain" }
+                })
+            );
+        });
 
+        const url ='http://localhost:8080/ProyectoFinal-backend-1.0-SNAPSHOT/api/app'
+        fetch(url,)
+        .then(response => response.json())
+        .then(data=>{
+
+            console.log(data)
+        })
+        .catch(err=>console.log(err))
+    </script>
+</form>
 
 
 
