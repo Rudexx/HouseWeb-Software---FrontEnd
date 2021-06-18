@@ -24,7 +24,7 @@
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Add a New Pet</a>
+                    <a class="nav-link" href="#" id="addpet">Add a New Pet</a>
                 </li>
 
                 <li class="nav-item">
@@ -119,6 +119,9 @@
 
     printTable("visits", "http://localhost:8080/ProyectoFinal-backend-1.0-SNAPSHOT/api/app/"+ myParam+"/owners/pets"
     , ['microchip' , 'name' , 'species', 'race', 'size', 'sex', 'picture'])
+
+    var addpet = document.getElementById("addpet");
+    addpet.setAttribute("href" , "pet_form.html?" + "username=" + myParam );
 
 
     </script>
