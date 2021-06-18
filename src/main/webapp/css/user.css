@@ -12,3 +12,12 @@ header{
     font-weight: bold ;
     font-family: "Times New Roman", serif;
 }
+table{
+
+    position: center;
+    bottom: 0;
+
+
+    left: 0;
+    right: 0;
+}

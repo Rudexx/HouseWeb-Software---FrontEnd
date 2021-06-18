@@ -1,98 +1,129 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Owner Page</title>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Owner Page</title>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-    <link rel="stylesheet" href="css/user.css">
-</head>
-<body>
-
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Four Paws Citizens</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Add a New Pet</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="#">Edit Owner</a>
-            </li>
-
-        </ul>
-    </div>
-</nav>
-<script>
-
-function printTable(elementId, path, columns, actions = []) {
-
-var xhr = new XMLHttpRequest();
-    xhr.open('GET', path, true);
-xhr.onreadystatechange = function() {
-
-if (xhr.readyState == 4 && xhr.status == 201) {
+        <link rel="stylesheet" href="css/user.css">
+    </head>
+    <body>
 
 
-var data = JSON.parse(xhr.responseText);
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Four Paws Citizens</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="addpet">Add a New Pet</a>
+                </li>
 
-var tbodyRef = document.getElementById(elementId).getElementsByTagName('tbody')[0];
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Edit Owner</a>
+                </li>
 
-data.map(d => {
+            </ul>
+        </div>
+    </nav>
+    <span class="label label-default bg-dark">Your Pets </span>
+    <table class="table table-dark table-striped" id="visits">
 
-var newRow = tbodyRef.insertRow();
+        <thead>
+        <tr>
+            <th scope="col">Microchip</th>
+            <th scope="col">Name</th>
+            <th scope="col">Species</th>
+            <th scope="col">Race</th>
+            <th scope="col">Size</th>
+            <th scope="col">Sex</th>
+            <th scope="col">Picture</th>
+        </tr>
+        </thead>
+        <tbody>
 
-columns.map(c => {
-var cell = newRow.insertCell();
-var text = document.createTextNode(d[c]);
-cell.appendChild(text);
-});
+        </tbody>
+    </table>
 
-if (actions.includes('create-case')) {
-var cell = newRow.insertCell();
-var action = document.createElement('button');
-action.setAttribute('onclick', 'location.href="./´PetCase_form?pet_id=' + d['pet_id'] + '";');
-var text = document.createTextNode('Create Case');
-action.appendChild(text);
-cell.appendChild(action);
-}
-if (actions.includes('create-visit')){
-var cell = newRow.insertCell();
-var action = document.createElement('button');
-action.setAttribute('onclick', 'location.href="./visit_form?pet_id=' + d['pet_id'] + '";');
-var text = document.createTextNode('Create Visit');
-action.appendChild(text)
-cell.appendChild(action);
-}
 
-if (actions.includes('modify-mascot')) {
-var cell = newRow.insertCell();
-var action = document.createElement('button');
-action.setAttribute('onclick', 'location.href="./-------' + d['authorId'] + '";');
-var text = document.createTextNode('Modify Mascot');
-action.appendChild(text);
-cell.appendChild(action);
 
-}
-});
+    <script>
 
-}
-}
+    function printTable(elementId, path, columns, actions = []) {
 
-xhr.send(null);
+    var xhr = new XMLHttpRequest();
+        xhr.open('GET', path, true);
+    xhr.onreadystatechange = function() {
 
-}
-</script>
-</body>
-</html>
+    if (xhr.readyState == 4) {
+
+
+    var data = JSON.parse(xhr.responseText);
+
+    var tbodyRef = document.getElementById(elementId).getElementsByTagName('tbody')[0];
+
+    data.map(d => {
+
+    var newRow = tbodyRef.insertRow();
+
+    columns.map(c => {
+    var cell = newRow.insertCell();
+    var text = document.createTextNode(d[c]);
+    cell.appendChild(text);
+    });
+
+    if (actions.includes('create-case')) {
+    var cell = newRow.insertCell();
+    var action = document.createElement('button');
+    action.setAttribute('onclick', 'location.href="./´PetCase_form?pet_id=' + d['pet_id'] + '";');
+    var text = document.createTextNode('Create Case');
+    action.appendChild(text);
+    cell.appendChild(action);
+    }
+    if (actions.includes('create-visit')){
+    var cell = newRow.insertCell();
+    var action = document.createElement('button');
+    action.setAttribute('onclick', 'location.href="./visit_form?pet_id=' + d['pet_id'] + '";');
+    var text = document.createTextNode('Create Visit');
+    action.appendChild(text)
+    cell.appendChild(action);
+    }
+
+    if (actions.includes('modify-mascot')) {
+    var cell = newRow.insertCell();
+    var action = document.createElement('button');
+    action.setAttribute('onclick', 'location.href="./-------' + d['authorId'] + '";');
+    var text = document.createTextNode('Modify Mascot');
+    action.appendChild(text);
+    cell.appendChild(action);
+
+    }
+    });
+
+    }
+    }
+
+    xhr.send(null);
+
+    }
+    const urlParams = new URLSearchParams(window.location.search);
+    const myParam = urlParams.get('username');
+
+    printTable("visits", "http://localhost:8080/ProyectoFinal-backend-1.0-SNAPSHOT/api/app/"+ myParam+"/owners/pets"
+    , ['microchip' , 'name' , 'species', 'race', 'size', 'sex', 'picture'])
+
+    var addpet = document.getElementById("addpet");
+    addpet.setAttribute("href" , "pet_form.html?" + "username=" + myParam );
+
+
+    </script>
+    </body>
+    </html>

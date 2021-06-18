@@ -24,18 +24,101 @@
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Add a New Visit</a>
+                <a class="nav-link" href="#" id="visit">Add a New Visit</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Edit Owner</a>
+                <a class="nav-link" href="#" id="case">Create case</a>
             </li>
 
         </ul>
     </div>
 </nav>
+<span class="label label-default bg-dark">Your Visits</span>
+<table class="table table-dark table-striped" id="visits">
+
+    <thead>
+    <tr>
+        <th scope="col">Created At</th>
+        <th scope="col">Type</th>
+        <th scope="col">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
 
 
+<script>
+            function printTable(elementId, path, columns, actions = []) {
 
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function() {
+
+            if (xhr.readyState == 4 && xhr.status == 201) {
+
+
+            var data = JSON.parse(xhr.responseText);
+
+            var tbodyRef = document.getElementById(elementId).getElementsByTagName('tbody')[0];
+
+            data.map(d => {
+
+            var newRow = tbodyRef.insertRow();
+
+            columns.map(c => {
+            var cell = newRow.insertCell();
+            var text = document.createTextNode(d[c]);
+            cell.appendChild(text);
+            });
+
+            if (actions.includes('create-visit')) {
+            var cell = newRow.insertCell();
+            var action = document.createElement('button');
+            action.setAttribute('onclick', 'location.href="./´visit_form?pet_id=' + d['pet_id'] + '";');
+            var text = document.createTextNode('Create Visit');
+            action.appendChild(text);
+            cell.appendChild(action);
+            }
+            if (actions.includes('create-visit')){
+            var cell = newRow.insertCell();
+            var action = document.createElement('button');
+            action.setAttribute('onclick', 'location.href="./visit_form?pet_id=' + d['pet_id'] + '";');
+            var text = document.createTextNode('Create Visit');
+            action.appendChild(text)
+            cell.appendChild(action);
+            }
+
+            if (actions.includes('modify-mascot')) {
+            var cell = newRow.insertCell();
+            var action = document.createElement('button');
+            action.setAttribute('onclick', 'location.href="./-------' + d['authorId'] + '";');
+            var text = document.createTextNode('Modify Mascot');
+            action.appendChild(text);
+            cell.appendChild(action);
+
+            }
+            });
+
+            }
+            }
+            xhr.open('GET', path, true);
+            xhr.send(null);
+
+            }
+            const urlParams = new URLSearchParams(window.location.search);
+            const myParam = urlParams.get('username');
+
+            printTable("visits", "http://localhost:8080/ProyectoFinal-backend-1.0-SNAPSHOT/api/app/VeterinarioCualquiera/vets/visits/131/list-by-vet?"
+                + "username=" + myParam, ['created_at' , 'type' , 'description'])
+
+            var createVisit = document.getElementById("visit")
+            createVisit.setAttribute("href" , "visit_form.html?" + "username=" + myParam );
+            var NewCases = document.getElementById("case")
+            NewCases.setAttribute("href" , "PetCase_form.html?" + "username=" + myParam );
+
+</script>
 
 </body>
 </html>

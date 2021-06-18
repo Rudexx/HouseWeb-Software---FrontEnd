@@ -13,17 +13,16 @@
 <body>
 
 
-<form id="form" >
+
 <div class="form-group">
-    <label for="exampleInputmicrochip">Email address</label>
-    <input  type="text" class="form-control bg-dark" id="exampleInputmicrochip" aria-describedby="microchipHelp" placeholder="Enter Microchip">
+    <label for="microchip">Microchip</label>
+    <input  type="text" class="form-control bg-dark text-warning" id="microchip" aria-describedby="microchipHelp" placeholder="Enter Microchip">
     <small id="microchipHelp" class="form-text text-light">Don't forget your pet's microchip.</small>
 </div>
 <div class="form-group">
-    <label for="exampleInputName">Name</label>
-    <input type="text" class="form-control bg-dark text-warning" id="exampleInputName" placeholder="Name">
+    <label for="name">Name</label>
+    <input type="text" class="form-control bg-dark text-warning" id="name" placeholder="Name">
 </div>
-
 
     <div class="form-group">
         <label for="specie">Specie:</label>
@@ -47,25 +46,61 @@
 
     <div class="form-group">
         <label for="picture">Picture:</label>
-        <input type="image" class="form-control bg-dark text-warning" id="picture">
-    </div>
-
-    <div class="form-group">
-        <label for="owner_id">Owner_ID:</label>
-        <input type="text" class="form-control bg-dark text-warning" id="owner_id" placeholder="Ex: Carlos">
+        <input type="text" class="form-control bg-dark text-warning" id="picture">
     </div>
 
 
-<button type="submit" class="btn btn-dark" >Enter</button>
-
-</form>
 
 
+<button type="button" id="button" class="btn btn-dark" >Enter</button>
+
+
+<script>
+
+    var button = document.getElementById("button")
+
+    button.addEventListener('click', function() {
+
+        var name = document.getElementById("name").value
+        var race = document.getElementById("race").value
+        var microchip = document.getElementById("microchip").value
+        var size = document.getElementById("size").value
+        var sex = document.getElementById("sex").value
+        var picture = document.getElementById("picture").value
+        var specie = document.getElementById("specie").value
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const myParam = urlParams.get('username');
 
 
 
-</body>
-</html>
+
+        var uri = 'http://localhost:8080/ProyectoFinal-backend-1.0-SNAPSHOT/api/app/' + myParam + '/owners/pets?' + "microchip=" +
+            microchip + "&" + "name=" + name + "&" + "race=" + race + "&" + "size=" + size +
+            "&" + "sex=" + sex + "&picture=" + picture + "&specie=" + specie;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', uri, true);
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 201) {
+                alert("Pet was succesfully created")
+                window.location = "owner.html?" + "username=" + myParam;
+            }
+        }
+
+
+
+        xhr.send(null);
+
+    });
+
+
+
+
+</script>
+
+
 
 
 </body>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Vet Page</title>
+    <title>Official Page</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
@@ -10,17 +10,37 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="css/official.css">
+    <h4 id="official"></h4>
 </head>
 <body>
 
 
-<form class="example" action="">
-    <input type="text" placeholder="Search.." name="search">
-    <button type="submit"><i class="fa fa-search"></i></button>
-</form>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const myParam = urlParams.get('username');
+
+    var parrafo=document.getElementById("official")
+
+    function showOwners(){
+        var xhr2 = new XMLHttpRequest();
+
+        xhr2.onreadystatechange = function () {
+            if (xhr2.readyState == 4) {
+                parrafo.innerText=xhr2.responseText;
+
+
+            }
+        }
+        xhr2.open('GET','http://localhost:8080/ProyectoFinal-backend-1.0-SNAPSHOT/api/app/'+ myParam+'/list-owners' , true);
+        xhr2.send(null);
+
+    }
+
+    showOwners();
 
 
 
+</script>
 
 </body>
 </html>
