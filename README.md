@@ -32,5 +32,5 @@ JDK 1.8
 #Desafios
 1) Gestion de riesgo ya que muchas veces en los proyectos no sale lo planeado desde el principio, entonces buscar una solición optima para quedarse estacando 
 2) La falta de timpo dentro del grupo tambien afecta bastante a la hora de desarrollar un proyecto 
-3) Nos encontramos personas que no conociamos dentro del gruopo al principio fue un poco incomodo, pero pero realmente fue un desafio
+3) Nos encontramos personas que no conociamos dentro del grupo al principio fue un poco incomodo, pero pero realmente fue un desafio
 
