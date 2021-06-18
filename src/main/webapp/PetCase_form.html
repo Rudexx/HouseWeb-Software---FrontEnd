@@ -13,7 +13,7 @@
 <body>
 
 
-<form action="PetCase_form.html">
+
 <div class="form-group">
     <label for="exampleInputDate">Date:</label>
     <input type="date" class="form-control bg-dark" id="exampleInputDate" aria-describedby="DateHelp" placeholder="Enter Date"
@@ -36,7 +36,91 @@
 
 
 <button type="submit" class="btn btn-dark" >Submit</button>
-</form>
 
+    Pets:<select id="pets" name="edi2" class="form-select bg-dark text-light"></select>
+<script>
+
+    function createLists(elementId,path, columns) {
+
+        var xhr2 = new XMLHttpRequest();
+
+        xhr2.onreadystatechange = function() {
+            if (xhr2.readyState == 4) {
+                var data = JSON.parse(xhr2.responseText);
+
+                var select = document.getElementById(elementId);
+                data.map(d => {
+
+                    var opt = document.createElement('option');
+                    columns.map(c => {
+                        opt.appendChild( document.createTextNode(d[c] + "     "));
+                        opt.value =  opt.value + d[c] +" " ;
+                        select.appendChild(opt);
+                    });
+
+
+
+                });
+
+
+            }
+        }
+        xhr2.open('GET', path, true);
+        xhr2.send(null);
+
+    }
+    const urlParams = new URLSearchParams(window.location.search);
+    const myParam = urlParams.get('username');
+    createLists(elementId = 'pets', 'http://localhost:8080/ProyectoFinal-backend-1.0-SNAPSHOT/api/app/' + myParam+ '/vets' , columns =
+        [ 'microchip',  'name',  'species',  'race',  'size',  'sex',
+            'picture', 'petid']);
+
+    var button = document.getElementById("button")
+
+    button.addEventListener('click', function() {
+        var created_at = document.getElementById("exampleInputDate").value
+        var type = document.getElementById("type").value
+        var description = document.getElementById("description").value
+        var pet = document.getElementById('pets').value;
+        pet = pet.split(" ");
+        var selectedPet = pet[11];
+
+        if (created_at !== "" && type !== "" && description !== "" && selectedPet !== "") {
+
+
+
+            var uri = 'http://localhost:8080/ProyectoFinal-backend-1.0-SNAPSHOT/api/app/'+myParam+'/owners/pets/'
+                + selectedPet + "?created_at=" + created_at + "&type=" + type
+                + "&description=" + description;
+
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', uri, true);
+
+            xhr.onreadystatechange = function () {
+
+                if (xhr.readyState == 4 && xhr.status == 201) {
+                    alert("Visit was created Succesfully")
+                    window.location = "vet.html?" + "username=" +myParam;
+
+                } else if (xhr.readyState == 4 && xhr.status == 406) {
+                    alert("error")
+                }
+
+            }
+
+
+            xhr.send(null);
+        }else
+        {
+            alert("incorrect Credentials")
+        }
+
+
+    });
+
+
+
+</script>
 </body>
 </html>
