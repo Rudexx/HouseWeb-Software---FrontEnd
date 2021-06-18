@@ -10,21 +10,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="css/official.css">
+    <p id="official"></p>
 </head>
 <body>
 
-<p id="official"></p>
+
 <script>
     const urlParams = new URLSearchParams(window.location.search);
     const myParam = urlParams.get('username');
 
     var parrafo=document.getElementById("official")
-    parrafo.addEventListener("click",function () {
+
+    function showOwners(){
         var xhr2 = new XMLHttpRequest();
 
         xhr2.onreadystatechange = function () {
             if (xhr2.readyState == 4) {
-                parrafo.textContent=xhr2.responseText
+                parrafo.innerText=xhr2.responseText;
 
 
             }
@@ -32,9 +34,9 @@
         xhr2.open('GET','http://localhost:8080/ProyectoFinal-backend-1.0-SNAPSHOT/api/app/'+ myParam+'/list-owners' , true);
         xhr2.send(null);
 
-    });
+    }
 
-
+    showOwners();
 
 
 
