@@ -34,3 +34,4 @@ JDK 1.8
 2) La falta de timpo dentro del grupo tambien afecta bastante a la hora de desarrollar un proyecto 
 3) Nos encontramos personas que no conociamos dentro del grupo al principio fue un poco incomodo, pero pero realmente fue un desafio
 
+Publicación Git Hub Pages: https://rudexx.github.io/HouseWeb-Software---FrontEnd/index.html
