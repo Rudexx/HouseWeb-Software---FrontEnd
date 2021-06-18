@@ -35,3 +35,4 @@ JDK 1.8
 3) Nos encontramos personas que no conociamos dentro del grupo al principio fue un poco incomodo, pero pero realmente fue un desafio
 
 Publicación Git Hub Pages: https://rudexx.github.io/HouseWeb-Software---FrontEnd/index.html
+Video De Youtube: https://youtu.be/HNMQ6Cc3xr4
