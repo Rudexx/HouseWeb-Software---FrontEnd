@@ -6,6 +6,16 @@
 -Joubert Daniel Alvarez.
 
 
+Link repositorio-BackEnd----> https://github.com/Rudexx/ProyectoFinal---BackEnd
+Stack:
+
+Wildfly 23.0.2.Final
+PostgreSQL 10
+PostgreSQL JDBC Driver 42.2.10
+JDK 1.8  
+
+
+
 #Retos
 1) Programar un pagina web implica saber un poco de diseño, aunque es una de las partes mas "faciles" en teoria no lo es,
    por que normalmente lo dejamos para lo ultimo,
