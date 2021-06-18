@@ -34,7 +34,7 @@
             </ul>
         </div>
     </nav>
-    <span class="label label-default bg-dark">Your Visits</span>
+    <span class="label label-default bg-dark">Your Petsgit </span>
     <table class="table table-dark table-striped" id="visits">
 
         <thead>
@@ -45,6 +45,7 @@
             <th scope="col">Race</th>
             <th scope="col">Size</th>
             <th scope="col">Sex</th>
+            <th scope="col">Picture</th>
         </tr>
         </thead>
         <tbody>
@@ -62,7 +63,7 @@
         xhr.open('GET', path, true);
     xhr.onreadystatechange = function() {
 
-    if (xhr.readyState == 4 && xhr.status == 201) {
+    if (xhr.readyState == 4) {
 
 
     var data = JSON.parse(xhr.responseText);
@@ -117,10 +118,9 @@
     const myParam = urlParams.get('username');
 
     printTable("visits", "http://localhost:8080/ProyectoFinal-backend-1.0-SNAPSHOT/api/app/"+ myParam+"/owners/pets"
-     ['microchip' , 'name' , 'species', 'race', 'size', 'sex', 'picture'])
+    , ['microchip' , 'name' , 'species', 'race', 'size', 'sex', 'picture'])
 
-    var createVisit = document.getElementById("visit")
-    createVisit.setAttribute("href" , "visit_form.html?" + "username=" + myParam );
+
     </script>
     </body>
     </html>
