@@ -1,0 +1,19 @@
+body{
+    background-image: url("vet.jpg");
+    color: aliceblue;
+    background-size:100%;
+    background-repeat: no-repeat;
+
+}
+
+header{
+    background: coral;
+    color: cornsilk;
+    text-align: center;
+    font-weight: bold ;
+    font-family: "Times New Roman", serif;
+}
+table{
+
+}
+

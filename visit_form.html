@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visit Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <link rel="stylesheet" href="css/user.css">
+</head>
+<body>
+
+
+
+<div class="form-group" >
+    <label for="exampleInputDate">Date:</label>
+
+    <input type="date" class="form-control bg-dark text-light" id="exampleInputDate" aria-describedby="DateHelp" placeholder="Enter Date"
+           value="2020-00-00">
+    <small id="DateHelp" class="form-text text-light">A correct date is always important.</small>
+</div>
+
+
+
+
+<select class="form-select bg-dark text-light" id="type">
+    <option value="esterilizacion">Esterilización</option>
+    <option value="implantacion de microchip">implantación de microchip</option>
+    <option value="vacunacion">Vacunacion</option>
+    <option value="desparasitaciOn">Desparasitación</option>
+    <option value="urgencia y control">Urgencia y Control</option>
+</select>
+
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <input type="text" class="form-control bg-dark text-light" id="description" placeholder="Description">
+    </div>
+
+
+
+    Pets:<select id="pets" name="edi2" class="form-select bg-dark text-light"></select>
+
+
+
+    <button type="button" class="btn btn-dark" id="button" >Submit</button>
+
+
+<script>
+
+    function createLists(elementId,path, columns) {
+
+        var xhr2 = new XMLHttpRequest();
+
+        xhr2.onreadystatechange = function() {
+            if (xhr2.readyState == 4) {
+                var data = JSON.parse(xhr2.responseText);
+
+                var select = document.getElementById(elementId);
+                data.map(d => {
+
+                    var opt = document.createElement('option');
+                    columns.map(c => {
+                        opt.appendChild( document.createTextNode(d[c] + "     "));
+                        opt.value =  opt.value + d[c] +" " ;
+                        select.appendChild(opt);
+                    });
+
+
+
+                });
+
+
+            }
+        }
+        xhr2.open('GET', path, true);
+        xhr2.send(null);
+
+    }
+    const urlParams = new URLSearchParams(window.location.search);
+    const myParam = urlParams.get('username');
+    createLists(elementId = 'pets', 'http://localhost:8080/ProyectoFinal-backend-1.0-SNAPSHOT/api/app/' + myParam+ '/vets' , columns =
+        [ 'microchip',  'name',  'species',  'race',  'size',  'sex',
+            'picture', 'petid']);
+
+    var button = document.getElementById("button")
+
+    button.addEventListener('click', function() {
+        var created_at = document.getElementById("exampleInputDate").value
+        var type = document.getElementById("type").value
+        var description = document.getElementById("description").value
+        var pet = document.getElementById('pets').value;
+        pet = pet.split(" ");
+        var selectedPet = pet[11];
+
+        if (created_at !== "" && type !== "" && description !== "" && selectedPet !== "") {
+
+
+
+            var uri = 'http://localhost:8080/ProyectoFinal-backend-1.0-SNAPSHOT/api/app/'
+                + myParam + "/vets/visits/" + selectedPet + "?created_at=" + created_at + "&type=" + type
+            + "&description=" + description;
+
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', uri, true);
+
+            xhr.onreadystatechange = function () {
+
+                if (xhr.readyState == 4 && xhr.status == 201) {
+                    alert("Visit was created Succesfully")
+                    window.location = "vet.html?" + "username=" +myParam;
+
+                } else if (xhr.readyState == 4 && xhr.status == 406) {
+                    alert("error")
+                }
+
+            }
+
+
+            xhr.send(null);
+        }else
+        {
+            alert("incorrect Credentials")
+        }
+
+
+    });
+
+
+
+</script>
+
+</body>
+</html>

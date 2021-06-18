@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vet Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <link rel="stylesheet" href="css/vet.css">
+</head>
+<body>
+
+
+<div class="form-group">
+    <label for="username">Username</label>
+    <input name ="username"type="text" class="form-control bg-dark" id="username" aria-describedby="emailHelp" placeholder="Ex: Veterinary15645">
+</div>
+<div class="form-group">
+    <label for="email">Email address</label>
+    <input name ="email"type="email" class="form-control bg-dark" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+    <small id="emailHelp" class="form-text text-light">We'll never share your email with anyone else.</small>
+</div>
+<div class="form-group">
+    <label for="password">Password</label>
+    <input name="password"type="password" class="form-control bg-dark text-warning" id="password" placeholder="Password">
+</div>
+
+
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input name="name"type="text" class="form-control bg-dark text-warning" id="name" placeholder="Name">
+    </div>
+
+    <div class="form-group">
+        <label for="address">Address</label>
+        <input name="address"type="text" class="form-control bg-dark text-warning" id="address" placeholder="Ex: Calle 35 20-17">
+    </div>
+
+    <div class="form-group">
+        <label for="neighbourhood">Neighbourhood</label>
+        <input name="neighbourhood"type="text" class="form-control bg-dark text-warning" id="neighbourhood" placeholder="Ex: Colombia, China, United States">
+    </div>
+
+
+<button type="button" class="btn btn-dark" id="button">Submit</button>
+
+<script>
+    var button = document.getElementById("button")
+
+    button.addEventListener('click', function() {
+
+        var username = document.getElementById("username").value
+        var password = document.getElementById("password").value
+        var name = document.getElementById("name").value
+        var address = document.getElementById("address").value
+        var neighbourhood = document.getElementById("neighbourhood").value
+
+
+
+
+        var uri = 'http://localhost:8080/ProyectoFinal-backend-1.0-SNAPSHOT/api/app?' + "username=" +
+            username + "&" + "password=" + password + "&" + "name=" + name + "&" + "address=" + address +
+            "&" + "neighbourhood=" + neighbourhood + "&role=vet";
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', uri, true);
+        xhr.onreadystatechange = function() {
+
+            if (xhr.readyState == 4 && xhr.status == 201) {
+                alert("Vet was succesfully created")
+                window.location = "Registrarse_InicioSession.html";
+            }
+
+        }
+
+
+        xhr.send(null);
+
+    });
+
+
+
+</script>
+
+</body>
+</html>

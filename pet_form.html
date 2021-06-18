@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pet Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <link rel="stylesheet" href="css/user.css">
+</head>
+<body>
+
+
+
+<div class="form-group">
+    <label for="microchip">Microchip</label>
+    <input  type="text" class="form-control bg-dark text-warning" id="microchip" aria-describedby="microchipHelp" placeholder="Enter Microchip">
+    <small id="microchipHelp" class="form-text text-light">Don't forget your pet's microchip.</small>
+</div>
+<div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control bg-dark text-warning" id="name" placeholder="Name">
+</div>
+
+    <div class="form-group">
+        <label for="specie">Specie:</label>
+        <input type="text" class="form-control bg-dark text-warning" id="specie" placeholder="Cat">
+    </div>
+
+    <div class="form-group">
+        <label for="race">Race:</label>
+        <input type="text" class="form-control bg-dark text-warning" id="race" placeholder="Domestic">
+    </div>
+
+    <div class="form-group">
+        <label for="size">Size:</label>
+        <input type="text" class="form-control bg-dark text-warning" id="size" placeholder="Ex: small">
+    </div>
+
+    <div class="form-group">
+        <label for="sex">Sex:</label>
+        <input type="text" class="form-control bg-dark text-warning" id="sex" placeholder="Ex: Man">
+    </div>
+
+    <div class="form-group">
+        <label for="picture">Picture:</label>
+        <input type="text" class="form-control bg-dark text-warning" id="picture">
+    </div>
+
+
+
+
+<button type="button" id="button" class="btn btn-dark" >Enter</button>
+
+
+<script>
+
+    var button = document.getElementById("button")
+
+    button.addEventListener('click', function() {
+
+        var name = document.getElementById("name").value
+        var race = document.getElementById("race").value
+        var microchip = document.getElementById("microchip").value
+        var size = document.getElementById("size").value
+        var sex = document.getElementById("sex").value
+        var picture = document.getElementById("picture").value
+        var specie = document.getElementById("specie").value
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const myParam = urlParams.get('username');
+
+
+
+
+        var uri = 'http://localhost:8080/ProyectoFinal-backend-1.0-SNAPSHOT/api/app/' + myParam + '/owners/pets?' + "microchip=" +
+            microchip + "&" + "name=" + name + "&" + "race=" + race + "&" + "size=" + size +
+            "&" + "sex=" + sex + "&picture=" + picture + "&specie=" + specie;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', uri, true);
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 201) {
+                alert("Pet was succesfully created")
+                window.location = "owner.html?" + "username=" + myParam;
+            }
+        }
+
+
+
+        xhr.send(null);
+
+    });
+
+
+
+
+</script>
+
+
+
+
+</body>
+</html>

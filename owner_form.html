@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Owner Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <link rel="stylesheet" href="css/user.css">
+</head>
+<body>
+
+
+<div class="form-group">
+    <label for="email">Email address</label>
+    <input type="email" class="form-control bg-dark text-warning" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+    <small id="emailHelp" class="form-text text-light">We'll never share your email with anyone else.</small>
+</div>
+
+<div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" class="form-control bg-dark text-warning" id="username" placeholder="Username">
+</div>
+
+<div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control bg-dark text-warning" id="password" placeholder="Password">
+</div>
+
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control bg-dark text-warning" id="name" placeholder="Name">
+    </div>
+
+    <div class="form-group">
+        <label for="address">Adress</label>
+        <input type="text" class="form-control bg-dark text-warning" id="address" placeholder="Ex: Calle 35 20-17">
+    </div>
+
+    <div class="form-group">
+        <label for="neighbourhood">Neighbourhood</label>
+        <input type="text" class="form-control bg-dark text-warning" id="neighbourhood" placeholder="Ex: Colombia, China, United States">
+    </div>
+
+
+<button type="button" class="btn btn-dark" id="button">Submit</button>
+
+
+<script>
+    var button = document.getElementById("button")
+
+    button.addEventListener('click', function() {
+        var email = document.getElementById("email").value
+        var username = document.getElementById("username").value
+        var password = document.getElementById("password").value
+        var name = document.getElementById("name").value
+        var address = document.getElementById("address").value
+        var neighbourhood = document.getElementById("neighbourhood").value
+
+        if (email !== "" && username !== "" && password !== "" && name !== "" && address !== "" && neighbourhood !== "") {
+
+
+
+        var uri = 'http://localhost:8080/ProyectoFinal-backend-1.0-SNAPSHOT/api/app?' + "username=" +
+            username + "&" + "password=" + password + "&" + "name=" + name + "&" + "address=" + address +
+            "&" + "neighbourhood=" + neighbourhood + "&" + "role=owner" + "&email=" + email;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', uri, true);
+
+        xhr.onreadystatechange = function () {
+
+            if (xhr.readyState == 4 && xhr.status == 201) {
+                alert("Owner was created Successfully")
+                window.location = "Registrarse_InicioSession.html";
+
+            } else if (xhr.readyState == 4 && xhr.status == 406) {
+                alert("That username has already been taken")
+            }
+
+        }
+
+
+        xhr.send(null);
+    }else
+    {
+    alert("incorrect Credentials")
+    }
+
+    });
+
+
+    function printTable(elementId, path, columns, actions = []) {
+
+        var username = document.getElementById("username")
+        var password = document.getElementById("password")
+        var name = document.getElementById("name")
+        var address = document.getElementById("address")
+        var neighbourhood = document.getElementById("neighbourhood")
+
+
+        var uri = 'http://localhost:8080/ProyectoFinal-backend-1.0-SNAPSHOT/api/app?' + "username=" +
+            username + "&" + "password=" + password + "&" + "name=" + name + "&" + "address=" + address +
+            "&" + "neighbourhood=" + neighbourhood + "&role=owner";
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', uri, true);
+        xhr.onreadystatechange = function() {
+
+            if (xhr.readyState == 4 && xhr.status == 201) {
+                console.log("llegue aca");
+
+            }
+
+        }
+
+        xhr.send(null);
+
+    }
+</script>
+
+</body>
+</html>

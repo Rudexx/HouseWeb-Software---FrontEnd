@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style ></style>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<header > <h5>Welcome to FourPawsCitizens,
+    please enter your credentials below:</h5>   </header>
+
+
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control bg-dark" id="username" aria-describedby="emailHelp" placeholder="Enter username">
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control bg-dark text-warning" id="password" placeholder="Password">
+    </div>
+
+    <button type="button" class="btn btn-dark" id="send" >Submit</button>
+
+<h3>Create User:</h3>
+
+<select class="form-select bg-dark text-light" aria-label="Default select example" id="seleccionado">
+    <option value="1">Owner</option>
+    <option value="2">Veterinary</option>
+    <option value="3">Official</option>
+</select>
+<button type="submit" class="btn btn-dark" id="crear">Create</button>
+
+
+<script>
+
+    var button = document.getElementById("crear");
+    button.addEventListener('click', function (){
+        var seleccionado = document.getElementById("seleccionado").value;
+        if(seleccionado === "1"){
+            window.location = "owner_form.html";
+        }else if(seleccionado === "2"){
+            window.location = "vet_form.html";
+        }else if(seleccionado ==="3"){
+            window.location = "official_form.html";
+        }
+    })
+
+    var submit = document.getElementById("send");
+    submit.addEventListener('click', function (){
+        var username = document.getElementById("username").value
+        var password = document.getElementById("password").value
+
+        var uri = 'http://localhost:8080/ProyectoFinal-backend-1.0-SNAPSHOT/api/app/' + username;
+        var l = btoa(username + ":" + password);
+        var xhr = new XMLHttpRequest();
+
+        xhr.open("GET", uri, true);
+        xhr.setRequestHeader('Authorization','Basic ' + l);
+        xhr.onreadystatechange = function() {
+
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var role = xhr.responseText.split(" ");
+                role = role[1];
+
+                if(role  === "owner"){
+                    window.location = "owner.html?" + "username=" +username;
+                }else if(role === "vet"){
+                    window.location = "vet.html?" + "username=" +username;
+                }else{
+                    window.location = "official.html?" + "username=" +username;
+                }
+
+
+
+
+            }
+
+        }
+
+
+        xhr.send(null);
+
+
+    })
+
+</script>
+
+
+
+</body>
+</html>
